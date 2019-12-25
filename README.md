@@ -32,8 +32,9 @@ git checkout production
 git pull
 ```
 
-### 3. Start the server
+### 3. Build and start the server
 ```bash
+sudo yarn build
 sudo yarn start
 ```
 
