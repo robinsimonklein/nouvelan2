@@ -5,6 +5,7 @@ const https = require('https');
 const express = require('express');
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const redirectSSL = require('redirect-ssl')
 
 // Prepare variables
 let credentials = {}
@@ -49,6 +50,9 @@ async function start() {
     } else {
         await nuxt.ready()
     }
+
+    // Redirect SSL middleware
+    app.use(redirectSSL)
 
     // Give nuxt middleware to express
     app.use(nuxt.render)
