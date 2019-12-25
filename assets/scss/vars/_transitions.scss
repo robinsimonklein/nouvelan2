@@ -1,0 +1,20 @@
+// list-transition
+.list-transition-enter, .list-transition-leave-to{
+  opacity: 0;
+  transform: scale(0.95);
+}
+.list-transition-leave-active {
+  position: absolute;
+}
+
+// zoom-transition
+.zoom-transition-enter-active {
+  transition: all .3s ease;
+}
+.zoom-transition-leave-active {
+  transition: all .3s ease;
+}
+.zoom-transition-enter, .zoom-transition-leave-to {
+  transform: scale(0.9);
+  opacity: 0;
+}

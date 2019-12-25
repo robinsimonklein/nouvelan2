@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  &__text {
+    font-size: .8rem;
+    color: $color-dark-3;
+  }
+}

@@ -37,8 +37,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: ['~/assets/scss/style.scss'],
   /*
   ** Plugins to load before mounting the App
   */
@@ -58,6 +57,16 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+      [
+          'nuxt-fontawesome', {
+              imports: [
+                  {
+                      set: '@fortawesome/free-solid-svg-icons',
+                      icons: ['fas']
+                  }
+              ]
+          }
+      ]
   ],
   /*
   ** Axios module configuration

@@ -1,0 +1,67 @@
+.todo-category {
+  background: $color-dark-2;
+  border-radius: .7rem;
+  padding: 0 0 .2rem 0;
+  margin-bottom: 1rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem .8rem 1.5rem 1.2rem;
+  }
+
+  &__icon {
+    margin-right: 1rem;
+    font-size: 1.4rem;
+  }
+
+  &__title {
+    font-size: 1.3rem;
+    flex: 1;
+  }
+
+  &__edit {
+    color: $color-dark-3;
+  }
+
+  &__add {
+    display: flex;
+    padding: .8rem;
+
+    &-loader {
+      margin-left: .05rem;
+      margin-right: 1.3rem;
+      opacity: 0;
+      transform: scale(.8);
+      transition: all .2s ease-out;
+
+      &.visible {
+        opacity: 1;
+        transform: scale(1);
+        transition: all .2s ease-out;
+      }
+    }
+
+    &-input {
+      background: none;
+      color: $color-text;
+      font-size: 1rem;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      width: 100%;
+
+      &::placeholder {
+        color: rgba($color-text, 0.4);
+        opacity: 1;
+      }
+
+      &:focus, &:hover {
+        border: none;
+        outline: none;
+        background: none;
+      }
+    }
+
+  }
+}
