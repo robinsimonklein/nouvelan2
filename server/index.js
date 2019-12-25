@@ -6,6 +6,10 @@ const express = require('express');
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
+// Prepare variables
+let credentials = {}
+let httpsServer = null
+
 // Create express app
 const app = express();
 
@@ -19,7 +23,7 @@ if(!config.dev) {
     const certificate = fs.readFileSync('/etc/letsencrypt/live/nouvelan.ynibling.ovh/cert.pem', 'utf8');
     const ca = fs.readFileSync('/etc/letsencrypt/live/nouvelan.ynibling.ovh/chain.pem', 'utf8');
 
-    const credentials = {
+    credentials = {
         key: privateKey,
         cert: certificate,
         ca: ca
@@ -52,7 +56,7 @@ async function start() {
     // Starting both http & https servers
     const httpServer = http.createServer(app);
     if(!config.dev) {
-        const httpsServer = https.createServer(credentials, app);
+        httpsServer = https.createServer(credentials, app);
     }
 
     httpServer.listen(process.env.PORT || 80, () => {
