@@ -1,6 +1,20 @@
 
 module.exports = {
   mode: 'universal',
+
+  env: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
+  /*
+  ** Headers of the page
+  */
+
+  server: {
+      port: process.env.PORT || 3000, // default: 3000
+      host: process.env.HOST || 'localhost', // default: localhost,
+  },
+
   /*
   ** Headers of the page
   */
