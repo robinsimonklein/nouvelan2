@@ -7,6 +7,9 @@ const app = express()
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
+// Static config
+app.use(express.static(__dirname, { dotfiles: 'allow' } ));
+
 async function start () {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
