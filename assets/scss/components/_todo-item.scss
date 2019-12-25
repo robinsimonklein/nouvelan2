@@ -1,0 +1,99 @@
+.todo-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: .6rem;
+  padding: .8rem;
+  font-size: 1rem;
+  transition: all .3s ease-out;
+
+  &__checkbox {
+    position: relative;
+    background-color: $color-dark-3;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 100%;
+    margin-right: 1.2rem;
+    padding: .2rem;
+
+    &:after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 100%;
+      background-color: $color-primary;
+      opacity: 0;
+      transform: scale(.2);
+      transition: all .2s $ease-bound;
+    }
+
+    &--checked {
+      &:after {
+        transform: scale(.6);
+        opacity: 1;
+        transition: all .3s $ease-bound;
+      }
+    }
+
+    // Colors
+
+    &-red {
+      &:after {
+        background: $color-red;
+      }
+    }
+    &-green {
+      &:after {
+        background: $color-green;
+      }
+    }
+    &-blue {
+      &:after {
+        background: $color-blue;
+      }
+    }
+    &-pink {
+      &:after {
+        background: $color-pink;
+      }
+    }
+    &-yellow {
+      &:after {
+        background: $color-yellow;
+      }
+    }
+  }
+
+  &__name {
+    flex: 1;
+  }
+
+  &__remove {
+    color: $color-alert;
+    font-size: 1.2rem;
+
+    &:hover, &:focus {
+      border: none;
+      outline: none;
+    }
+
+    &.hidden {
+      visibility: hidden;
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    width: calc(100% - 3rem);
+    background: rgba($color-white, 0.05)
+  }
+}

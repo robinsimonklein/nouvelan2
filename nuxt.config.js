@@ -1,6 +1,21 @@
+require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
+
+  env: {
+      baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+
+  /*
+  ** Headers of the page
+  */
+
+  server: {
+      port: process.env.PORT || 3000, // default: 3000
+      host: process.env.HOST || 'localhost', // default: localhost,
+  },
+
   /*
   ** Headers of the page
   */
@@ -22,8 +37,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-  ],
+  css: ['~/assets/scss/style.scss'],
   /*
   ** Plugins to load before mounting the App
   */
@@ -43,6 +57,16 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+      [
+          'nuxt-fontawesome', {
+              imports: [
+                  {
+                      set: '@fortawesome/free-solid-svg-icons',
+                      icons: ['fas']
+                  }
+              ]
+          }
+      ]
   ],
   /*
   ** Axios module configuration

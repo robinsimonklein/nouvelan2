@@ -1,72 +1,47 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        nouvelan2
-      </h1>
-      <h2 class="subtitle">
-        Liste de courses 
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+    <section class="container">
+        <div class="row">
+            <div
+                    class="col-xs-12 col-sm-6 col-md-4"
+                    v-for="category in categories"
+            >
+                <TodoCategory
+                        :key="category.id"
+                        :id="category.id"
+                        :name="category.name"
+                        :color="category.color"
+                        :icon="category.icon"/>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+    import TodoCategory from '../components/todo/TodoCategory'
 
-export default {
-  components: {
-    Logo
-  }
-}
+    export default {
+        components: {TodoCategory},
+        head () {
+            return {
+                title: 'Nouvel An'
+            }
+        },
+
+        computed: {
+            categories() {
+                return this.$store.getters['categories/getCategories']
+            }
+        },
+        beforeMount() {
+            this.$store.dispatch('todos/load')
+            this.$store.dispatch('categories/load')
+        },
+
+        mounted () {
+            setInterval(() => {
+                this.$store.dispatch('todos/load')
+            }, 5000)
+        }
+
+    }
 </script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

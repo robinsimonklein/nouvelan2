@@ -1,0 +1,24 @@
+/*
+  Fonts
+ */
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,700&display=swap');
+
+// Fonts mixins
+
+@mixin text-regular {
+  font-family: "Nunito", Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@mixin text-italic {
+  font-family: "Nunito", Arial, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+@mixin text-bold {
+  font-family: "Nunito", Arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}

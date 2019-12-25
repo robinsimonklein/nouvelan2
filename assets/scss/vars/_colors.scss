@@ -1,0 +1,58 @@
+$color-primary: #6FFFE9;
+$color-secondary: #a466ff;
+
+$color-text: #ddd;
+
+$color-red: #FE647B;
+$color-yellow: #FEDC8A;
+$color-blue: #6ED7FD;
+$color-green: #9FEF7A;
+$color-pink: #FEA2F9;
+
+
+$color-success: #73BF44;
+$color-warning: #BF743B;
+$color-alert: #BF5944;
+
+$color-light: #5BC0BE;
+
+$color-dark-3: #3A506B;
+$color-dark-2: #131a31;
+$color-dark: #0B132B;
+
+$color-white: #fff;
+$color-black: #000;
+
+// classes
+
+.color-red {
+  color: $color-red;
+}
+.color-yellow {
+  color: $color-yellow;
+}
+.color-blue {
+  color: $color-blue;
+}
+.color-green {
+  color: $color-green;
+}
+.color-pink {
+  color: $color-pink;
+}
+
+.bg-red {
+  background: $color-red;
+}
+.bg-yellow {
+  background: $color-yellow;
+}
+.bg-blue {
+  background: $color-blue;
+}
+.bg-green {
+  background: $color-green;
+}
+.bg-pink {
+  background: $color-pink;
+}

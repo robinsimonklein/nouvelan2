@@ -1,0 +1,46 @@
+.app-loader {
+  position: fixed;
+  z-index: 900;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: 100vw;
+  background: $color-dark;
+  padding: 20% 2rem 0;
+
+  &__svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  &__explosion, &__rocket {
+    fill: $color-primary;
+
+    .app-loader--red &{
+      fill: $color-red;
+    }
+    .app-loader--blue &{
+      fill: $color-blue;
+    }
+    .app-loader--pink &{
+      fill: $color-pink;
+    }
+    .app-loader--green &{
+      fill: $color-green;
+    }
+    .app-loader--yellow &{
+      fill: $color-yellow;
+    }
+  }
+
+  &__explosion {
+    // opacity: 0;
+  }
+
+  &__rocket {
+    transform-origin: bottom center;
+    // transform: translateY(-1267px);
+  }
+}
