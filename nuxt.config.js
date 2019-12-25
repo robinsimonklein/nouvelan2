@@ -1,6 +1,4 @@
 require('dotenv').config()
-const path = require('path')
-const fs = require('fs')
 
 module.exports = {
   mode: 'universal',
@@ -16,10 +14,6 @@ module.exports = {
   server: {
       port: process.env.PORT || 3000, // default: 3000
       host: process.env.HOST || 'localhost', // default: localhost,
-      https: {
-          key: fs.readFileSync(path.resolve(__dirname, 'privkey.pem')),
-          cert: fs.readFileSync(path.resolve(__dirname, 'cert.pem'))
-      }
   },
 
   /*
