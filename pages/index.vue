@@ -41,6 +41,12 @@
             setInterval(() => {
                 this.$store.dispatch('todos/load')
             }, 5000)
+
+            this.$axios.post('/api/categories/add', {
+                name: 'Test',
+                slug: 'test',
+                color: 'red'
+            })
         }
 
     }
