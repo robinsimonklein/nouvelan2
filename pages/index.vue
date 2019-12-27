@@ -33,14 +33,14 @@
             }
         },
         beforeMount() {
-            this.$store.dispatch('todos/load')
             this.$store.dispatch('categories/load')
+            this.$store.dispatch('todos/load')
         },
 
         mounted () {
             setInterval(() => {
                 this.$store.dispatch('todos/load')
-            }, 5000)
+            }, 8000)
         }
 
     }

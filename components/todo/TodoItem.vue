@@ -37,9 +37,19 @@
           return;
         }
         if(this.checked){
-          this.$store.dispatch('todos/uncheck', this.id)
+          this.$store.dispatch('todos/update', {
+              todoId: this.id,
+              payload: {
+                  checked: false
+              }
+          })
         }else {
-          this.$store.dispatch('todos/check', this.id)
+          this.$store.dispatch('todos/update', {
+              todoId: this.id,
+              payload: {
+                  checked: true
+              }
+          })
         }
       },
       remove() {
