@@ -33,16 +33,21 @@
         },
         methods: {
             async add() {
-                await this.$axios.post('/api/categories/add', {
+                this.$store.dispatch('categories/add', {
                     name: this.name,
                     slug: this.slug,
                     color: this.color,
                     icon: this.icon,
                 })
-                this.name = null
-                this.slug = null
-                this.color = null
-                this.icon = null
+                    .then((response) => {
+                        this.name = null
+                        this.slug = null
+                        this.color = null
+                        this.icon = null
+                    })
+                    .catch((error) => {
+                        console.error(error.message)
+                    })
             }
         }
     }
