@@ -40,7 +40,7 @@
         mounted () {
             setInterval(() => {
                 this.$store.dispatch('todos/load')
-            }, 8000)
+            }, 5000)
         }
 
     }

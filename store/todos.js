@@ -39,8 +39,8 @@ export const actions = {
     },
 
     async delete(context, todoId) {
-        let {data} = await axios.delete('/api/todos/' + todoId)
         context.commit('remove', todoId)
+        let {data} = await axios.delete('/api/todos/' + todoId)
 
     },
 
