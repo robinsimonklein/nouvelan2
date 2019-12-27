@@ -1,93 +1,87 @@
-const { Router } = require('express')
+const {Router} = require('express')
 
 const router = Router()
 
-// Mock Users
-const todos = []
+const models = require('./../models/index')
 
-/* GET todos listing. */
-router.get('/todos', function (req, res, next) {
-  res.json(todos)
-})
 
 /* ADD todos */
-router.post('/todos/add', function (req, res, next) {
-  let todoIds = todos.map(todo => todo.id)
-  let lastTodoId = 0;
-  if(todos.length >= 1) {
-    lastTodoId = Math.max(...todoIds)
-  }
-
-  let newTodo = req.body
-
-  Object.assign(newTodo, {id: lastTodoId + 1});
-
-  todos.push(newTodo)
-
-  if (req) {
-    res.json(newTodo)
-    // res.sendStatus(404)
-  } else {
-    res.sendStatus(404)
-  }
+router.post('/todos/add', async function (req, res, next) {
+    console.log(req.body)
+    try {
+        const todo = await models.Todo.create({
+            name: req.body.name,
+            checked: req.body.checked || false,
+            amount: req.body.amount,
+            CategoryId: req.body.CategoryId
+        })
+        res.status(201).json(todo)
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 })
 
-/* CHECK todos by ID. */
-router.post('/todos/:id/check', function (req, res, next) {
-  const id = parseInt(req.params.id)
-
-  const index = todos.findIndex((todo) => {
-    return todo.id === id
-  });
-
-  if (index !== undefined && index !== null && index >= 0) {
-    todos[index].checked = true
-    res.sendStatus(200)
-  } else {
-    res.sendStatus(404)
-  }
-})
-
-/* UNCHECK todos by ID. */
-router.post('/todos/:id/uncheck', function (req, res, next) {
-  const id = parseInt(req.params.id)
-
-  const index = todos.findIndex((todo) => {
-    return todo.id === id
-  });
-
-  if (index !== undefined && index !== null && index >= 0) {
-    todos[index].checked = false
-    res.sendStatus(200)
-  } else {
-    res.sendStatus(404)
-  }
-})
-
-/* DELETE todos by ID. */
-router.delete('/todos/:id', function (req, res, next) {
-  const id = parseInt(req.params.id)
-
-  const index = todos.findIndex((todo) => {
-    return todo.id === id
-  });
-
-  if (index !== undefined && index !== null && index >= 0) {
-    todos.splice(index, 1)
-    res.sendStatus(200)
-  } else {
-    res.sendStatus(404)
-  }
+/* GET todos listing. */
+router.get('/todos', async function (req, res, next) {
+    try {
+        const todos = await models.Todo.findAll();
+        res.status(200).json(todos);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 })
 
 /* GET todos by ID. */
-router.get('/todos/:id', function (req, res, next) {
-  const id = parseInt(req.params.id)
-  if (id >= 0 && id < todos.length) {
-    res.json(todos[id])
-  } else {
-    res.sendStatus(404)
-  }
+router.get('/todos/:todoId', async function (req, res, next) {
+    try {
+        const { todoId } = req.params;
+
+        const todos = await models.Todo.findOne({
+            where: {id: todoId}
+        });
+
+        if(todos){
+            res.status(200).json(todos);
+        }else {
+            res.status(404).send('Todo with the specified ID does not exists')
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
 })
+
+/* UPDATE todos by id */
+router.put('/todos/:todoId', async function (req, res, next) {
+    try {
+        const { todoId } = req.params;
+        const [ updated ] = await models.Todo.update(req.body, {
+            where: { id: todoId }
+        });
+        if (updated) {
+            const todos = await models.Todo.findAll();
+            return res.status(200).json(todos);
+        }
+        throw new Error('Todo not found');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+})
+
+/* DELETE todos by ID. */
+router.delete('/todos/:todoId', async function (req, res, next) {
+    try {
+        const { todoId } = req.params;
+        const deleted = await models.Todo.destroy({
+            where: { id: todoId }
+        });
+        if (deleted) {
+            res.status(204).send("Post deleted");
+        }
+        throw new Error("Todo not found");
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
+
 
 module.exports = router

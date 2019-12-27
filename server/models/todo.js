@@ -4,16 +4,11 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING,
         amount: DataTypes.INTEGER,
         checked: DataTypes.BOOLEAN,
-        idCategory: DataTypes.INTEGER
     }, {});
     Todo.associate = function (models) {
         // associations can be defined here
 
-        models.Todo.belongsTo(models.Category, {
-            foreignKey: {
-                allowNull: false
-            }
-        })
+        models.Todo.belongsTo(models.Category)
     };
     return Todo;
 };

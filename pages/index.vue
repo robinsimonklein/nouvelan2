@@ -33,20 +33,14 @@
             }
         },
         beforeMount() {
-            this.$store.dispatch('todos/load')
             this.$store.dispatch('categories/load')
+            this.$store.dispatch('todos/load')
         },
 
         mounted () {
             setInterval(() => {
                 this.$store.dispatch('todos/load')
-            }, 5000)
-
-            this.$axios.post('/api/categories/add', {
-                name: 'Test',
-                slug: 'test',
-                color: 'red'
-            })
+            }, 8000)
         }
 
     }

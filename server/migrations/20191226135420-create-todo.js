@@ -20,13 +20,14 @@ module.exports = {
                 type: Sequelize.BOOLEAN,
                 allowNull: false
             },
-            idCategory: {
+            CategoryId: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
                 references: {
                     model: 'Categories',
                     key: 'id'
-                }
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'SET NULL'
             },
             createdAt: {
                 allowNull: false,

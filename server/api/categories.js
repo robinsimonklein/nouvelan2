@@ -4,59 +4,45 @@ const router = Router()
 
 const models = require('./../models/index')
 
-// Mock Users
-const categories = [
-    {
-        id: 1,
-        name: 'Boire',
-        color: 'blue',
-        icon: 'glass-martini-alt'
-    },
-    {
-        id: 2,
-        name: 'Manger',
-        color: 'pink',
-        icon: 'pizza-slice'
-    },
-    {
-        id: 3,
-        name: 'S\'amuser',
-        color: 'yellow',
-        icon: 'laugh-beam'
-    },
-    {
-        id: 4,
-        name: 'À ramener',
-        color: 'green',
-        icon: 'suitcase'
-    },
-]
-
 /* ADD category. */
-router.post('/categories/add', function (req, res, next) {
-    console.log(req.body)
-    models.Category.create({
-        name: req.body.name || '',
-        slug: req.body.slug || '',
-        color: req.body.color || '',
-        icon: req.body.icon || ''
-    })
-
-    res.json(categories)
+router.post('/categories/add', async function (req, res, next) {
+    try {
+        const category = await models.Category.create({
+            name: req.body.name,
+            slug: req.body.slug,
+            color: req.body.color || '',
+            icon: req.body.icon || ''
+        })
+        res.status(201).json(category)
+    }catch(error) {
+        res.status(500).send(error.message);
+    }
 })
 
 /* GET categories listing. */
-router.get('/categories', function (req, res, next) {
-    res.json(categories)
+router.get('/categories', async function (req, res, next) {
+    try {
+        const categories = await models.Category.findAll();
+        res.status(200).json(categories);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 })
 
 /* GET category by ID. */
-router.get('/categories/:id', function (req, res, next) {
+router.get('/categories/:id', async function (req, res, next) {
     const id = parseInt(req.params.id)
-    if (id >= 0 && id < categories.length) {
-        res.json(categories[id])
-    } else {
-        res.sendStatus(404)
+    try {
+        const category = await models.Category.findOne({
+            where: { id: id }
+        });
+        if(category){
+            res.status(200).json(category);
+        }else {
+            res.status(404).send('Category with the specified ID does not exists')
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 })
 

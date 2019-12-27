@@ -65,7 +65,7 @@
           this.$store.dispatch('todos/add', {
             name: this.addInput,
             checked: false,
-            idCategory: this.id
+            CategoryId: this.id
           })
           .then((response) => {
             this.addLoading = false
