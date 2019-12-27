@@ -73,6 +73,8 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+      baseUrl: `http://${process.env.AXIOS_HOST}:${process.env.PORT}`,
+      https: process.env.NODE_ENV === 'production'
   },
   /*
   ** Build configuration
